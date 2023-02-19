@@ -59,6 +59,7 @@ export async function getStaticProps({ params, previewData }) {
       sitemetaimage: {
         url: 'https://images.unsplash.com/photo-1599227294320-6de91c96396d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1744&q=80',
       },
+      blogpostsperpage: 1,
     }
   }
   if (isNaN(pageNumber)) {
@@ -99,9 +100,9 @@ export async function getStaticPaths() {
   const client = createClient()
   let siteMetadata = {}
   try {
-    await client.getSingle('sitemetadata')
+    siteMetadata = await client.getSingle('sitemetadata')
   } catch (error) {
-    siteMetadata.data = { blogpostsperpage: 4 }
+    siteMetadata.data = { blogpostsperpage: 1 }
   }
   const posts = await client.getByType('post', {
     pageSize: siteMetadata.data.blogpostsperpage,

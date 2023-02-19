@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file
 
+## [0.0.4] - 2023-02-19
+
+### Changed
+
+- Now catching siteMetadata from await in getStaticPaths
+- Setting blogpostsperpage if no siteMetadata published
+
 ## [0.0.3] - 2023-02-19
 
 ### Added
