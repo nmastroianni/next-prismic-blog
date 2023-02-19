@@ -39,6 +39,7 @@ export default function Home({ siteMetadata }) {
         </Heading>
         <p className="mx-auto mb-8 max-w-xl rounded-lg bg-neutral-200 p-6 text-center shadow-lg shadow-purple-300">
           Code for the Heading component above...
+          <code className="inline-block">{`<Heading as="h2" size="7xl">This is a Homepage (/index.jsx) Heading1 Component set to 7xl</Heading>`}</code>
         </p>
         <p className="mx-auto max-w-xl rounded-lg bg-neutral-900 p-6 text-center text-neutral-200 shadow-lg shadow-purple-300">
           Fonts used: Headings = Lora, Body = Quicksand
