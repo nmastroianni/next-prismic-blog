@@ -29,6 +29,14 @@ const BlogIndex = ({ posts, siteMetadata }) => {
       <Heading as="h2" size="5xl">
         Blog Index Page 1
       </Heading>
+      <code className="my-8 block bg-slate-900 p-8 text-slate-200">{`
+        {posts.results.map(post => 
+           (
+            <article key={post.id}>ETC.</article>
+          )
+        )}
+      `}</code>
+      <p>Below is the shape of your post data</p>
       {posts.results.length > 0 ? (
         <code>{JSON.stringify(posts)}</code>
       ) : (

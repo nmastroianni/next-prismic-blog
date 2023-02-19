@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file
 
+## [0.0.5] - 2023-02-19
+
+### Added
+
+- Code sample for mapping posts on blog index
+
 ## [0.0.4] - 2023-02-19
 
 ### Changed
