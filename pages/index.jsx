@@ -12,13 +12,13 @@ export default function Home({ siteMetadata }) {
     <Layout>
       <Head>
         <title>{`${prismicH.asText(sitetitle)}`}</title>
-        <link rel="canonical" href={`${siteurl}/blog`} />
+        <link rel="canonical" href={`${siteurl}`} />
         <>
           <meta name="description" content={sitemetadescription} />
           <meta property="og:description" content={sitemetadescription} />
         </>
 
-        <meta property="og:url" content={`${siteurl}/blog`} />
+        <meta property="og:url" content={`${siteurl}`} />
         <meta property="og:type" content="website" />
         <meta property="og:image" content={sitemetaimage.url} />
 
@@ -34,7 +34,11 @@ export default function Home({ siteMetadata }) {
       </Head>
       {/* BUILD YOUR HOMEPAGE HERE */}
       <div>
-        <Heading as="h1" size={'7xl'} className="mx-auto max-w-screen-2xl">
+        <Heading
+          as="h1"
+          size="7xl"
+          className="mx-auto max-w-screen-2xl text-center lg:text-left"
+        >
           This is a Homepage (/index.jsx) Heading1 Component set to 7xl
         </Heading>
         <p className="mx-auto mb-8 max-w-xl rounded-lg bg-neutral-200 p-6 text-center shadow-lg shadow-purple-300">
@@ -50,7 +54,19 @@ export default function Home({ siteMetadata }) {
 }
 export async function getStaticProps({ previewData }) {
   const client = createClient({ previewData })
-  const siteMetadata = await client.getSingle('sitemetadata')
+  let siteMetadata = {}
+  try {
+    siteMetadata = await client.getSingle('sitemetadata')
+  } catch (error) {
+    siteMetadata.data = {
+      sitetitle: [{ spans: [], text: 'ADD SITE METADATA', type: 'heading1' }],
+      siteurl: 'https://addsitemetadta.com',
+      sitemetadescription: 'ADD SITEMETADATA IN PRISMIC',
+      sitemetaimage: {
+        url: 'https://images.unsplash.com/photo-1599227294320-6de91c96396d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1744&q=80',
+      },
+    }
+  }
 
   return {
     props: {

@@ -89,8 +89,21 @@ const Post = ({ post, siteMetadata }) => {
 export default Post
 export async function getStaticProps({ params, previewData }) {
   const client = createClient({ previewData })
+
+  let siteMetadata = {}
+  try {
+    siteMetadata = await client.getSingle('sitemetadata')
+  } catch (error) {
+    siteMetadata.data = {
+      sitetitle: [{ spans: [], text: 'ADD SITE METADATA', type: 'heading1' }],
+      siteurl: 'https://addsitemetadta.com',
+      sitemetadescription: 'ADD SITEMETADATA IN PRISMIC',
+      sitemetaimage: {
+        url: 'https://images.unsplash.com/photo-1599227294320-6de91c96396d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1744&q=80',
+      },
+    }
+  }
   const post = await client.getByUID('post', params.uid)
-  const siteMetadata = await client.getSingle('sitemetadata')
 
   return {
     props: {
@@ -104,7 +117,7 @@ export async function getStaticPaths() {
   const client = createClient()
   const posts = await client.getAllByType('post')
   return {
-    paths: posts.map(post => prismicH.asLink(post)),
+    paths: posts.map((post) => prismicH.asLink(post)),
     fallback: false,
   }
 }

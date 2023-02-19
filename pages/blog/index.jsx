@@ -29,22 +29,49 @@ const BlogIndex = ({ posts, siteMetadata }) => {
       <Heading as="h2" size="5xl">
         Blog Index Page 1
       </Heading>
-      <code>{JSON.stringify(posts)}</code>
+      {posts.results.length > 0 ? (
+        <code>{JSON.stringify(posts)}</code>
+      ) : (
+        <p>
+          There are no published posts in Prismic. Please go to{' '}
+          <a href="https://prismic.io" target="_blank">
+            Prismic
+          </a>{' '}
+          and create some posts.
+        </p>
+      )}
     </Layout>
   )
 }
 export default BlogIndex
 export async function getStaticProps({ previewData }) {
   const client = createClient({ previewData })
-  const siteMetadata = await client.getSingle('sitemetadata')
-  const posts = await client.getByType('post', {
-    pageSize: siteMetadata.data.blogpostsperpage,
-    page: 1,
-    orderings: {
-      field: 'document.first_publication_date',
-      direction: 'desc',
-    },
-  })
+  let siteMetadata = {}
+  try {
+    siteMetadata = await client.getSingle('sitemetadata')
+  } catch (error) {
+    siteMetadata.data = {
+      sitetitle: [{ spans: [], text: 'ADD SITE METADATA', type: 'heading1' }],
+      siteurl: 'https://addsitemetadta.com',
+      sitemetadescription: 'ADD SITEMETADATA IN PRISMIC',
+      sitemetaimage: {
+        url: 'https://images.unsplash.com/photo-1599227294320-6de91c96396d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1744&q=80',
+      },
+    }
+  }
+  let posts = {}
+  try {
+    posts = await client.getByType('post', {
+      pageSize: siteMetadata.data.blogpostsperpage,
+      page: 1,
+      orderings: {
+        field: 'document.first_publication_date',
+        direction: 'desc',
+      },
+    })
+  } catch (error) {
+    posts.results = []
+  }
 
   return {
     props: {

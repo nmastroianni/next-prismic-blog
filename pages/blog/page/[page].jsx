@@ -48,7 +48,19 @@ export default BlogPages
 export async function getStaticProps({ params, previewData }) {
   const client = createClient({ previewData })
   const pageNumber = Number(params.page)
-  const siteMetadata = await client.getSingle('sitemetadata')
+  let siteMetadata = {}
+  try {
+    siteMetadata = await client.getSingle('sitemetadata')
+  } catch (error) {
+    siteMetadata.data = {
+      sitetitle: [{ spans: [], text: 'ADD SITE METADATA', type: 'heading1' }],
+      siteurl: 'https://addsitemetadta.com',
+      sitemetadescription: 'ADD SITEMETADATA IN PRISMIC',
+      sitemetaimage: {
+        url: 'https://images.unsplash.com/photo-1599227294320-6de91c96396d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1744&q=80',
+      },
+    }
+  }
   if (isNaN(pageNumber)) {
     return {
       notFound: true,
@@ -85,7 +97,12 @@ export async function getStaticProps({ params, previewData }) {
 
 export async function getStaticPaths() {
   const client = createClient()
-  const siteMetadata = await client.getSingle('sitemetadata')
+  let siteMetadata = {}
+  try {
+    await client.getSingle('sitemetadata')
+  } catch (error) {
+    siteMetadata.data = { blogpostsperpage: 4 }
+  }
   const posts = await client.getByType('post', {
     pageSize: siteMetadata.data.blogpostsperpage,
   })
