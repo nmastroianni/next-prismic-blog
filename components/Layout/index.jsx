@@ -1,4 +1,4 @@
-import { Quicksand } from '@next/font/google'
+import { Quicksand } from 'next/font/google'
 
 const sans = Quicksand({ subsets: ['latin'] })
 
@@ -7,7 +7,7 @@ const Layout = ({ children }) => {
     <div className="relative">
       <a
         href="#main-content"
-        className=" btn-warning btn fixed top-12 -left-[320px] z-10 transform opacity-50 focus:translate-x-[380px] focus:opacity-100 "
+        className=" btn-warning btn fixed -left-[320px] top-12 z-10 transform opacity-50 focus:translate-x-[380px] focus:opacity-100 "
       >
         Press Enter to Skip to Main Content
       </a>

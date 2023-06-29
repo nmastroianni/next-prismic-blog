@@ -1,35 +1,34 @@
 import '../styles/globals.css'
 import Link from 'next/link'
 import Head from 'next/head'
-import { Quicksand } from '@next/font/google'
+import { Quicksand } from 'next/font/google'
 // import Script from 'next/script'
 import { PrismicProvider, PrismicLink } from '@prismicio/react'
 import { PrismicPreview, PrismicNextImage } from '@prismicio/next'
 import { repositoryName } from '../prismicio'
-import Heading from '@/components/Heading'
 // import { getCookie } from 'cookies-next'
 const sans = Quicksand({ subsets: ['latin'] })
 
 const richTextComponents = {
   heading1: ({ children }) => (
-    <Heading as="h1" size="5xl" className="mb-7 mt-12 first:mt-0 last:mb-0">
+    <h1 as="h1" size="5xl" className="mb-7 mt-12 first:mt-0 last:mb-0">
       {children}
-    </Heading>
+    </h1>
   ),
   heading2: ({ children }) => (
-    <Heading as="h2" size="4xl" className="mb-7 last:mb-0">
+    <h2 as="h2" size="4xl" className="mb-7 last:mb-0">
       {children}
-    </Heading>
+    </h2>
   ),
   heading3: ({ children }) => (
-    <Heading as="h3" size="2xl" className="mb-7 last:mb-0">
+    <h3 as="h3" size="2xl" className="mb-7 last:mb-0">
       {children}
-    </Heading>
+    </h3>
   ),
   heading4: ({ children }) => (
-    <Heading as="h4" size="xl" className="mb-7 last:mb-0">
+    <h4 as="h4" size="xl" className="mb-7 last:mb-0">
       {children}
-    </Heading>
+    </h4>
   ),
   paragraph: ({ children }) => (
     <p className={`mb-7 last:mb-0 md:text-lg lg:text-xl xl:text-2xl`}>
@@ -69,7 +68,7 @@ const richTextComponents = {
     return (
       <div className="mx-auto max-w-screen-sm overflow-hidden rounded shadow-xl">
         <div
-          className="aspect-w-16 aspect-h-9"
+          className="aspect-h-9 aspect-w-16"
           dangerouslySetInnerHTML={{ __html: node.oembed.html }}
         />
       </div>

@@ -1,6 +1,5 @@
 import Head from 'next/head'
 import Layout from '@/components/Layout'
-import Heading from '@/components/Heading'
 import { createClient } from '@/prismicio'
 import * as prismicH from '@prismicio/helpers'
 
@@ -26,9 +25,7 @@ const BlogIndex = ({ posts, siteMetadata }) => {
 
         <meta property="twitter:image" content={sitemetaimage.url} />
       </Head>
-      <Heading as="h2" size="5xl">
-        Blog Index Page 1
-      </Heading>
+      <h2>Blog Index Page 1</h2>
       <code className="my-8 block bg-slate-900 p-8 text-slate-200">{`
         {posts.results.map(post => 
            (
