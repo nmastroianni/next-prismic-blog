@@ -5,10 +5,10 @@ import * as prismicH from '@prismicio/helpers'
 
 export default function Home({ siteMetadata }) {
   const {
-    data: { sitetitle, siteurl, sitemetadescription, sitemetaimage },
+    data: { sitetitle, siteurl, sitemetadescription, sitemetaimage, sitetheme },
   } = siteMetadata
   return (
-    <Layout>
+    <Layout theme={sitetheme}>
       <Head>
         <title>{`${prismicH.asText(sitetitle)}`}</title>
         <link rel="canonical" href={`${siteurl}`} />

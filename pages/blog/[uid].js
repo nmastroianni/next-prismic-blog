@@ -7,69 +7,58 @@ import { components } from '@/slices'
 import * as prismicH from '@prismicio/helpers'
 
 const Post = ({ post, siteMetadata }) => {
+  const {
+    data: { sitetitle, siteurl, sitemetadescription, sitemetaimage, sitetheme },
+  } = siteMetadata
   const { data } = post
   return (
-    <Layout>
+    <Layout theme={sitetheme}>
       <Head>
         <title>{`${prismicH.asText(data.title)} · ${prismicH.asText(
-          siteMetadata.data.sitetitle
+          sitetitle,
         )}`}</title>
         <link
           rel="canonical"
-          href={
-            data.canonicalurl || `${siteMetadata.data.siteurl}/${post.url}/`
-          }
+          href={data.canonicalurl || `${siteurl}/${post.url}/`}
         />
         {data.metadescription ||
-          (siteMetadata.data.sitemetadescription && (
+          (sitemetadescription && (
             <meta
               name="description"
-              content={
-                data.metadescription || siteMetadata.data.sitemetadescription
-              }
+              content={data.metadescription || sitemetadescription}
             />
           ))}
         {data.metadescription ||
-          (siteMetadata.data.sitemetadescription && (
+          (sitemetadescription && (
             <meta
               property="og:description"
-              content={
-                data.metadescription || siteMetadata.data.sitemetadescription
-              }
+              content={data.metadescription || sitemetadescription}
             />
           ))}
         <meta
           property="og:url"
-          content={
-            data.canonicalurl || `${siteMetadata.data.siteurl}/${post.url}/`
-          }
+          content={data.canonicalurl || `${siteurl}/${post.url}/`}
         />
         <meta property="og:type" content="website" />
 
         {data.metaimage.url ||
-          (siteMetadata.data.sitemetaimage.url && (
+          (sitemetaimage.url && (
             <meta
               property="og:image"
-              content={
-                data.metaimage.url || siteMetadata.data.sitemetaimage.url
-              }
+              content={data.metaimage.url || sitemetaimage.url}
             />
           ))}
 
         <meta property="twitter:card" content="summary" />
         <meta
           name="twitter:description"
-          content={
-            data.metadescription || siteMetadata.data.sitemetadescription
-          }
+          content={data.metadescription || sitemetadescription}
         />
         {data.metaimage.url ||
-          (siteMetadata.data.sitemetaimage.url && (
+          (sitemetaimage.url && (
             <meta
               property="twitter:image"
-              content={
-                data.metaimage.url || siteMetadata.data.sitemetaimage.url
-              }
+              content={data.metaimage.url || sitemetaimage.url}
             />
           ))}
       </Head>
@@ -117,7 +106,7 @@ export async function getStaticPaths() {
   const client = createClient()
   const posts = await client.getAllByType('post')
   return {
-    paths: posts.map((post) => prismicH.asLink(post)),
+    paths: posts.map(post => prismicH.asLink(post)),
     fallback: false,
   }
 }

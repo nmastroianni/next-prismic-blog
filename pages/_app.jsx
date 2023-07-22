@@ -1,42 +1,28 @@
 import '../styles/globals.css'
 import Link from 'next/link'
 import Head from 'next/head'
-import { Quicksand } from 'next/font/google'
 // import Script from 'next/script'
 import { PrismicProvider, PrismicLink } from '@prismicio/react'
 import { PrismicPreview, PrismicNextImage } from '@prismicio/next'
 import { repositoryName } from '../prismicio'
 // import { getCookie } from 'cookies-next'
-const sans = Quicksand({ subsets: ['latin'] })
 
 const richTextComponents = {
   heading1: ({ children }) => (
-    <h1 as="h1" size="5xl" className="mb-7 mt-12 first:mt-0 last:mb-0">
-      {children}
-    </h1>
+    <h1 className="my-4 first:mt-0 last:mb-0">{children}</h1>
   ),
   heading2: ({ children }) => (
-    <h2 as="h2" size="4xl" className="mb-7 last:mb-0">
-      {children}
-    </h2>
+    <h2 className="my-4 last:mb-0 text-themed-base">{children}</h2>
   ),
-  heading3: ({ children }) => (
-    <h3 as="h3" size="2xl" className="mb-7 last:mb-0">
-      {children}
-    </h3>
-  ),
-  heading4: ({ children }) => (
-    <h4 as="h4" size="xl" className="mb-7 last:mb-0">
-      {children}
-    </h4>
-  ),
+  heading3: ({ children }) => <h3 className="my-4 last:mb-0">{children}</h3>,
+  heading4: ({ children }) => <h4 className="my-4 last:mb-0">{children}</h4>,
   paragraph: ({ children }) => (
-    <p className={`mb-7 last:mb-0 md:text-lg lg:text-xl xl:text-2xl`}>
+    <p className={`my-4 last:mb-0 md:text-lg lg:text-xl xl:text-2xl`}>
       {children}
     </p>
   ),
   oList: ({ children }) => (
-    <ol className="mb-7 pl-4 last:mb-0 md:pl-6">{children}</ol>
+    <ol className="my-4 pl-4 last:mb-0 md:pl-6">{children}</ol>
   ),
   oListItem: ({ children }) => (
     <li className="mb-1 list-decimal pl-1 last:mb-0 md:pl-2 md:text-lg lg:text-xl xl:text-2xl">
@@ -44,7 +30,7 @@ const richTextComponents = {
     </li>
   ),
   list: ({ children }) => (
-    <ul className="mb-7 pl-4 last:mb-0 md:pl-6">{children}</ul>
+    <ul className="my-4 pl-4 last:mb-0 md:pl-6">{children}</ul>
   ),
   listItem: ({ children }) => (
     <li className="mb-1 list-disc pl-1 last:mb-0 md:pl-2 md:text-lg lg:text-xl xl:text-2xl">
@@ -52,7 +38,7 @@ const richTextComponents = {
     </li>
   ),
   preformatted: ({ children }) => (
-    <pre className="mb-7 rounded bg-slate-100 p-4 text-sm last:mb-0 md:p-8 md:text-lg lg:text-xl">
+    <pre className="my-4 rounded bg-slate-100 p-4 text-sm last:mb-0 md:p-8 md:text-lg lg:text-xl">
       <code>{children}</code>
     </pre>
   ),
@@ -130,7 +116,7 @@ export default function App({ Component, pageProps }) {
             }}
           />
         )} */}
-        <Component {...pageProps} className={sans.className} />
+        <Component {...pageProps} />
       </PrismicPreview>
     </PrismicProvider>
   )
